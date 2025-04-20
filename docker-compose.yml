@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+  proxy:
+    image: nginx:stable-alpine
+    container_name: proxy
+    ports:
+      - "8080:80"
+    networks:
+      - lb_net
+    volumes:
+      - ./ansible/templates/nginx.conf:/etc/nginx/nginx.conf:ro
+
+  app1:
+    build: ./app
+    container_name: app1
+    environment:
+      - APP_NAME=app1
+    networks:
+      - lb_net
+  app2:
+    build: ./app
+    container_name: app2
+    environment:
+      - APP_NAME=app2
+    networks:
+      - lb_net
+  app3:
+    build: ./app
+    container_name: app3
+    environment:
+      - APP_NAME=app3
+    networks:
+      - lb_net
+
+networks:
+  lb_net:
+    driver: bridge

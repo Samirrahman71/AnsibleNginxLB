@@ -1,0 +1,28 @@
+name: Local NGINX LB CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Docker Compose
+        run: sudo apt-get update && sudo apt-get install -y docker-compose
+      - name: Build and Start Services
+        run: docker-compose up -d --build
+      - name: Wait for app containers
+        run: sleep 10
+      - name: Set up Python & Ansible
+        uses: actions/setup-python@v4
+      - name: Install Ansible
+        run: pip install ansible
+      - name: Run Ansible Playbook
+        run: ansible-playbook -i ansible/inventory/hosts ansible/lb.yml
+      - name: Smoke Test
+        run: docker-compose exec proxy curl -s localhost | grep "Hello from"
+      - name: Tear Down
+        if: always()
+        run: docker-compose down

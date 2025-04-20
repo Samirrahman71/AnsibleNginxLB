@@ -1,0 +1,4 @@
+boto3
+azure-mgmt-network
+google-cloud-compute
+python-dotenv

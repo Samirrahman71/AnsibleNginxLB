@@ -1,0 +1,11 @@
+---
+- name: Configure NGINX load balancer
+  hosts: proxy
+  connection: docker
+  tasks:
+    - name: Template nginx.conf
+      template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+    - name: Reload NGINX
+      command: nginx -s reload
