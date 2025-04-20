@@ -1,0 +1,143 @@
+/* Styles for the load distribution visualization */
+#load-distribution {
+    background-color: var(--light-bg);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#load-distribution h3 {
+    margin-bottom: 5px;
+}
+
+#load-distribution p {
+    margin-bottom: 20px;
+    color: var(--light-text);
+}
+
+.distribution-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.distribution-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bar-label {
+    width: 80px;
+    font-weight: 500;
+    text-align: right;
+}
+
+.bar-container {
+    flex-grow: 1;
+    height: 30px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    color: white;
+    font-weight: 500;
+    min-width: 50px;
+    transition: width 0.5s ease;
+}
+
+.bar.app1 {
+    background-color: var(--app1-color);
+}
+
+.bar.app2 {
+    background-color: var(--app2-color);
+}
+
+.bar.app3 {
+    background-color: var(--app3-color);
+}
+
+.bar-percent {
+    width: 50px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.stats-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.reset-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.reset-button:hover {
+    background-color: #d32f2f;
+}
+
+/* Performance Indicator Styles */
+.performance-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.metric {
+    background-color: var(--dark-bg);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.metric-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 10px 0;
+    color: var(--primary-color);
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: var(--light-text);
+}
+
+/* Responsive styles for the distribution visualization */
+@media (max-width: 768px) {
+    .distribution-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .bar-label {
+        width: 100%;
+        text-align: left;
+    }
+    
+    .bar-percent {
+        width: 100%;
+        text-align: right;
+    }
+}

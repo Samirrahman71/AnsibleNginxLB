@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is a Load Balancer? - Live Demo (Server {{server_name}})</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/distribution.css">
+    <script src="/static/counter.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>What is a Load Balancer?</h1>
+            <div class="server-badge {{server_name}}">You are on Server: {{server_name}}</div>
+        </header>
+        
+        <div class="intro-banner">
+            <p><strong>Try this:</strong> Refresh this page several times and watch the server indicator change color! Each refresh sends you to a different server behind the load balancer.</p>
+        </div>
+        
+        <section class="explanation">
+            <h2>Load Balancing Explained Simply</h2>
+            <p>Imagine a popular restaurant with a line of customers waiting to be seated. If the restaurant has only one host seating people, that creates a bottleneck.</p>
+            <p>A load balancer works like having multiple hosts who can each seat customers at different tables. When traffic increases, the load balancer distributes visitors evenly across multiple servers, so no single server gets overwhelmed.</p>
+        </section>
+        
+        <section class="main-content">
+            <div class="info-panel">
+                <h2>What's Happening Right Now?</h2>
+                <div class="active-server">
+                    <h3>You're connected to {{server_name}}</h3>
+                    <p>This page is being served by one of three identical servers. The NGINX load balancer decided which server would handle your request.</p>
+                </div>
+                <div class="server-stats">
+                    <div class="stat">
+                        <span class="label">Server started:</span>
+                        <span class="value">{{uptime}} seconds ago</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">Current time:</span>
+                        <span class="value">{{timestamp}}</span>
+                    </div>
+                    <div class="stat">
+                        <span class="label">Visitors served by this server:</span>
+                        <span class="value">{{request_count}}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="live-demo">
+                <h2>Live Demo: Watch It Work</h2>
+                <div class="diagram">
+                    <div class="diagram-layer">
+                        <div class="diagram-item client">
+                            <div class="icon">🖥️</div>
+                            <div class="label">Your Browser</div>
+                        </div>
+                        <div class="diagram-arrow">⬇️</div>
+                    </div>
+                    
+                    <div class="diagram-layer">
+                        <div class="diagram-item lb">
+                            <div class="icon">⚖️</div>
+                            <div class="label">NGINX Load Balancer</div>
+                            <div class="sublabel">Distributes traffic evenly</div>
+                        </div>
+                        <div class="diagram-arrow">⬇️</div>
+                    </div>
+                    
+                    <div class="diagram-layer servers">
+                        <div class="diagram-item server app1">
+                            <div class="icon">🖥️</div>
+                            <div class="label">Server 1</div>
+                        </div>
+                        <div class="diagram-item server app2">
+                            <div class="icon">🖥️</div>
+                            <div class="label">Server 2</div>
+                        </div>
+                        <div class="diagram-item server app3">
+                            <div class="icon">🖥️</div>
+                            <div class="label">Server 3</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="benefits">
+            <h2>Why Use a Load Balancer?</h2>
+            <div class="benefits-grid">
+                <div class="benefit">
+                    <div class="benefit-icon">🔄</div>
+                    <h3>Never Down</h3>
+                    <p>If one server crashes, the others keep working. Your website stays online even when problems occur.</p>
+                </div>
+                
+                <div class="benefit">
+                    <div class="benefit-icon">🚀</div>
+                    <h3>Handles Traffic Spikes</h3>
+                    <p>When lots of people visit at once, the load balancer shares the work so everything stays fast.</p>
+                </div>
+                
+                <div class="benefit">
+                    <div class="benefit-icon">💰</div>
+                    <h3>Cost Effective</h3>
+                    <p>You can use many smaller servers instead of one giant expensive one, saving money while improving reliability.</p>
+                </div>
+                
+                <div class="benefit">
+                    <div class="benefit-icon">🔧</div>
+                    <h3>Easy Updates</h3>
+                    <p>Update your website without any downtime by taking servers offline one at a time while others keep working.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="distribution-section">
+            <h2>See Load Balancing in Action</h2>
+            <div id="load-distribution">
+                <!-- JS will populate this -->
+            </div>
+            
+            <div class="performance-container">
+                <h3>Performance Benefits</h3>
+                <div class="performance-metrics">
+                    <div class="metric">
+                        <div class="metric-value">99.99%</div>
+                        <div class="metric-label">Potential Uptime</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">67%</div>
+                        <div class="metric-label">Reduced Server Load</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">3x</div>
+                        <div class="metric-label">Faster Scalability</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="real-world">
+            <h2>Real World Examples</h2>
+            <p>Almost every major website uses load balancers:</p>
+            <ul class="examples-list">
+                <li><strong>Netflix</strong> uses load balancers to stream videos to millions of people simultaneously</li>
+                <li><strong>Amazon</strong> handles Black Friday shopping traffic using advanced load balancing</li>
+                <li><strong>Google</strong> distributes search queries across thousands of servers</li>
+                <li><strong>Social media sites</strong> use load balancers to handle posts, photos, and videos from millions of users</li>
+            </ul>
+        </section>
+        
+        <section class="tech-details">
+            <h2>For IT Professionals: How It's Built</h2>
+            <div class="tech-highlights">
+                <div class="tech-item">
+                    <h3>NGINX Configuration</h3>
+                    <div class="code-snippet">
+                        <pre><code>upstream backend {
+    server app1:8000;
+    server app2:8000;
+    server app3:8000;
+}
+server {
+    listen 80;
+    location / {
+        proxy_pass http://backend;
+    }
+}</code></pre>
+                    </div>
+                </div>
+                
+                <div class="tech-item">
+                    <h3>Technologies Used</h3>
+                    <ul>
+                        <li><strong>NGINX:</strong> Fast, reliable web server acting as the load balancer</li>
+                        <li><strong>Docker:</strong> Containers for consistent environments</li>
+                        <li><strong>Ansible:</strong> Automates configuration of all components</li>
+                        <li><strong>Python:</strong> Simple web servers that power the backend</li>
+                    </ul>
+                    <p class="github-link">See the full project on <a href="https://github.com/Samirrahman71/AnsibleNginxLB">GitHub</a></p>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <div class="footer-content">
+                <p>NGINX Load Balancer Demo | Created with Docker, Ansible, and Python</p>
+                <p><a href="https://github.com/Samirrahman71/AnsibleNginxLB">View Source Code on GitHub</a></p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Highlight the current server in the diagram
+        document.addEventListener('DOMContentLoaded', function() {
+            const serverName = "{{server_name}}";
+            const serverElements = document.querySelectorAll('.diagram .server');
+            serverElements.forEach(element => {
+                if (element.classList.contains(serverName)) {
+                    element.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

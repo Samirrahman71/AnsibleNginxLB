@@ -1,0 +1,400 @@
+/* User-friendly NGINX Load Balancer Demo styles */
+:root {
+    /* Color scheme */
+    --app1-color: #4caf50; /* Green */
+    --app2-color: #2196f3; /* Blue */
+    --app3-color: #ff9800; /* Orange */
+    --lb-color: #9c27b0; /* Purple */
+    --primary-color: #3f51b5; /* Indigo */
+    --accent-color: #ff4081; /* Pink */
+    --dark-bg: #f8f9fa;
+    --light-bg: #ffffff;
+    --text-color: #333333;
+    --light-text: #6c757d;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', Oxygen, Ubuntu, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--dark-bg);
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 0;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.server-badge {
+    padding: 10px 18px;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+}
+
+.server-badge.app1 {
+    background-color: var(--app1-color);
+}
+
+.server-badge.app2 {
+    background-color: var(--app2-color);
+}
+
+.server-badge.app3 {
+    background-color: var(--app3-color);
+}
+
+/* Intro banner */
+.intro-banner {
+    background-color: #fff3cd;
+    border-left: 5px solid #ffc107;
+    padding: 15px 20px;
+    margin-bottom: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.intro-banner p {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Explanation section */
+.explanation {
+    background-color: var(--light-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 30px;
+}
+
+.explanation p {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+/* Main content grid */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.info-panel, .live-demo {
+    background-color: var(--light-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.active-server {
+    margin-bottom: 20px;
+}
+
+.active-server h3 {
+    color: var(--primary-color);
+}
+
+.server-stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.stat {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: var(--dark-bg);
+    border-radius: 6px;
+}
+
+.stat .label {
+    font-weight: 500;
+    color: var(--light-text);
+}
+
+.stat .value {
+    font-weight: 600;
+}
+
+/* Diagram styles */
+.diagram {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.diagram-layer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.diagram-arrow {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.diagram-item {
+    padding: 15px;
+    border-radius: var(--border-radius);
+    width: 200px;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+}
+
+.diagram-item .icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.diagram-item .label {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.diagram-item .sublabel {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.diagram-item.client {
+    background-color: #607d8b;
+    color: white;
+}
+
+.diagram-item.lb {
+    background-color: var(--lb-color);
+    color: white;
+    width: 250px;
+}
+
+.diagram-layer.servers {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.diagram-item.server {
+    width: 120px;
+    color: white;
+}
+
+.diagram-item.server.app1 {
+    background-color: var(--app1-color);
+}
+
+.diagram-item.server.app2 {
+    background-color: var(--app2-color);
+}
+
+.diagram-item.server.app3 {
+    background-color: var(--app3-color);
+}
+
+.diagram-item.server.active {
+    box-shadow: 0 0 0 3px #ffeb3b, 0 0 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+/* Benefits section */
+.benefits {
+    margin-bottom: 40px;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.benefit {
+    background-color: var(--light-bg);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: transform 0.2s ease;
+}
+
+.benefit:hover {
+    transform: translateY(-5px);
+}
+
+.benefit-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.benefit h3 {
+    color: var(--primary-color);
+}
+
+/* Real-world examples */
+.real-world {
+    background-color: var(--light-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 40px;
+}
+
+.examples-list {
+    margin-left: 25px;
+    margin-top: 15px;
+}
+
+.examples-list li {
+    margin-bottom: 10px;
+    font-size: 1.05rem;
+}
+
+/* Technical details section */
+.tech-details {
+    background-color: var(--light-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 40px;
+}
+
+.tech-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.code-snippet {
+    margin: 15px 0;
+}
+
+code, pre {
+    background-color: #f6f8fa;
+    border-radius: 6px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+}
+
+pre {
+    padding: 15px;
+    border: 1px solid #e1e4e8;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+}
+
+.tech-item ul {
+    padding-left: 20px;
+}
+
+.tech-item li {
+    margin-bottom: 10px;
+}
+
+.github-link {
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 25px 0;
+    margin-top: 40px;
+    border-radius: var(--border-radius);
+}
+
+.footer-content {
+    text-align: center;
+}
+
+footer a {
+    color: white;
+    text-decoration: underline;
+}
+
+footer a:hover {
+    text-decoration: none;
+    opacity: 0.9;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .main-content,
+    .benefits-grid,
+    .tech-highlights {
+        grid-template-columns: 1fr;
+    }
+    
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .server-badge {
+        margin-top: 15px;
+    }
+    
+    .diagram-layer.servers {
+        flex-wrap: wrap;
+    }
+}
+

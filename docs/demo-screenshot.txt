@@ -1,0 +1,2 @@
+This is a placeholder for a screenshot of the load balancer demo.
+The actual live demo shows color-coded servers with a visualization of load distribution across the three backend servers.
