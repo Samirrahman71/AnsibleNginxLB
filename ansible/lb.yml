@@ -2,10 +2,34 @@
 - name: Configure NGINX load balancer
   hosts: proxy
   connection: docker
+  vars:
+    lb_method: "{{ lb_method | default('round-robin') }}"
   tasks:
+    - name: Set config template based on load balancing method
+      set_fact:
+        config_template: >-
+          {% if lb_method == 'least-connections' %}
+          templates/nginx-least-conn.conf.j2
+          {% elif lb_method == 'ip-hash' %}
+          templates/nginx-ip-hash.conf.j2
+          {% else %}
+          templates/nginx-round-robin.conf.j2
+          {% endif %}
+
+    - name: Display selected load balancing method
+      debug:
+        msg: "Configuring load balancer with {{ lb_method }} method using template {{ config_template }}"
+
     - name: Template nginx.conf
       template:
-        src: templates/nginx.conf.j2
+        src: "{{ config_template }}"
         dest: /etc/nginx/nginx.conf
+      register: nginx_config
+
     - name: Reload NGINX
       command: nginx -s reload
+      when: nginx_config.changed
+
+    - name: Report status
+      debug:
+        msg: "NGINX load balancer configured with {{ lb_method }} method. Access the load balancer at http://localhost:8080"

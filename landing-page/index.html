@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnsibleNginxLB - Load Balancer Simulation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <h1>Ansible<span>Nginx</span>LB</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#tech-stack">Tech Stack</a></li>
+                    <li><a href="#getting-started">Getting Started</a></li>
+                    <li><a href="https://github.com/Samirrahman71/AnsibleNginxLB" target="_blank" class="github-btn">GitHub <i class="fab fa-github"></i></a></li>
+                </ul>
+            </nav>
+            <div class="hero">
+                <div class="hero-text">
+                    <h1>NGINX Load Balancer Simulation</h1>
+                    <p>Ever wonder how big websites handle millions of visitors without crashing? This fun project shows you how!</p>
+                    <div class="hero-buttons">
+                        <a href="#getting-started" class="btn btn-primary">Get Started</a>
+                        <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="load-balancer-diagram">
+                        <div class="user-requests">
+                            <i class="fas fa-users"></i>
+                            <p>User Requests</p>
+                            <div class="arrow-down"></div>
+                        </div>
+                        <div class="nginx-box">
+                            <i class="fas fa-server"></i>
+                            <p>NGINX Load Balancer</p>
+                            <div class="arrow-multiple"></div>
+                        </div>
+                        <div class="app-servers">
+                            <div class="server">
+                                <i class="fas fa-rocket"></i>
+                                <p>App Server 1</p>
+                            </div>
+                            <div class="server">
+                                <i class="fas fa-rocket"></i>
+                                <p>App Server 2</p>
+                            </div>
+                            <div class="server">
+                                <i class="fas fa-rocket"></i>
+                                <p>App Server 3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="overview" class="overview">
+        <div class="container">
+            <h2>Project Overview</h2>
+            <p class="section-intro">AnsibleNginxLB shows you how big websites handle thousands of visitors at once without crashing. It's like seeing behind the scenes of your favorite streaming site!</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>What is Load Balancing?</h3>
+                    <p>Imagine a busy restaurant with multiple cashiers. Load balancing is like having a host who directs each new customer to the least busy cashier. On websites, it means sending each visitor to the least busy server so everyone gets fast service!</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Educational Purpose</h3>
+                    <p>This project is like a miniature version of how real websites work. You can see with your own eyes how your web requests get handled, which is normally invisible when you browse the internet!</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Real-World Application</h3>
+                    <p>Ever wonder how Netflix keeps working during a new season release when millions watch at once? Or how Amazon handles Black Friday shopping? They use load balancers! This project shows you the same technique in a simple way.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <p class="section-intro">Let's follow what happens when you click on a website - it's more interesting than you might think!</p>
+            
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>User Request</h3>
+                        <p>When you click a website link or type a URL, your browser is like sending a letter asking "Can I see this website please?" This is called a request.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>NGINX Load Balancer</h3>
+                        <p>Think of NGINX as a traffic cop at a busy intersection. It receives your request and says, "Hmm, Server 1 is busy with 10 people, Server 2 only has 3 people - let's send this request to Server 2!"</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Distribution Algorithm</h3>
+                        <p>This is just a fancy way of saying "taking turns." Like when kids line up for ice cream - first cone goes to Server 1, second to Server 2, third to Server 3, then back to Server 1 again. This way, everyone gets a fair share of work!</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Backend Processing</h3>
+                        <p>The chosen server (like Server 2) says "I'll handle this!" and creates the webpage you asked for. In our demo, each server has a different color, so you can see which one responded to you.</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Visual Confirmation</h3>
+                        <p>Here's the fun part! Each time you click refresh, you might get a different colored response because a different server handled your request. It's like playing a slot machine, but instead of fruits, you get web servers!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tech-stack" class="tech-stack">
+        <div class="container">
+            <h2>Technology Stack</h2>
+            <p class="section-intro">The tools we're using (don't worry if this looks complicated - you don't need to understand it all!)</p>
+            
+            <div class="technologies">
+                <div class="tech">
+                    <div class="tech-icon">
+                        <i class="fab fa-docker"></i>
+                    </div>
+                    <h3>Docker</h3>
+                    <p>Containers for consistent environments, making the application portable and easy to deploy.</p>
+                </div>
+                <div class="tech">
+                    <div class="tech-icon">
+                        <img src="images/nginx-icon.svg" alt="NGINX" class="custom-icon">
+                    </div>
+                    <h3>NGINX</h3>
+                    <p>High-performance web server and reverse proxy used as the load balancer.</p>
+                </div>
+                <div class="tech">
+                    <div class="tech-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3>Python</h3>
+                    <p>Backend application servers built with Python to handle and respond to web requests.</p>
+                </div>
+                <div class="tech">
+                    <div class="tech-icon">
+                        <img src="images/ansible-icon.svg" alt="Ansible" class="custom-icon">
+                    </div>
+                    <h3>Ansible</h3>
+                    <p>Configuration management to automate NGINX configuration across environments.</p>
+                </div>
+                <div class="tech">
+                    <div class="tech-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3>CI/CD</h3>
+                    <p>GitHub Actions workflow for continuous integration and deployment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="getting-started" class="getting-started">
+        <div class="container">
+            <h2>Getting Started</h2>
+            <p class="section-intro">Run this project on your own machine in just a few minutes</p>
+            
+            <div class="prerequisites">
+                <h3>Prerequisites</h3>
+                <ul>
+                    <li><i class="fab fa-docker"></i> Docker Desktop</li>
+                    <li><i class="fas fa-cubes"></i> Docker Compose</li>
+                    <li><i class="fas fa-terminal"></i> Ansible (optional)</li>
+                </ul>
+            </div>
+            
+            <div class="installation-steps">
+                <div class="step">
+                    <h3>1. Clone the Repository</h3>
+                    <div class="code-block">
+                        <pre><code>git clone https://github.com/Samirrahman71/AnsibleNginxLB.git
+cd AnsibleNginxLB</code></pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <h3>2. Start the Application</h3>
+                    <div class="code-block">
+                        <pre><code>docker-compose up -d --build</code></pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <h3>3. Configure NGINX with Ansible (Optional)</h3>
+                    <div class="code-block">
+                        <pre><code>ansible-playbook -i ansible/inventory/hosts ansible/lb.yml</code></pre>
+                    </div>
+                </div>
+                <div class="step">
+                    <h3>4. Access the Demo</h3>
+                    <p>Open your browser and navigate to: <a href="http://localhost:8080">http://localhost:8080</a></p>
+                    <p>Refresh the page multiple times to see the load balancer in action!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <h2>Why Load Balancing Matters</h2>
+            <div class="benefits-grid">
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Improved Performance</h3>
+                    <p>Ever been stuck in a long line at a store with only one cashier open? Load balancing is like opening multiple checkouts so everyone gets helped faster!</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>High Availability</h3>
+                    <p>If you have only one server and it crashes, your website goes down. Load balancing is like having backup singers - if the lead singer loses their voice, the show can still go on!</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </div>
+                    <h3>Scalability</h3>
+                    <p>It's like a restaurant that can quickly add more tables during the dinner rush. When more people visit your website, you can simply add more servers and the load balancer will include them automatically!</p>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Security</h3>
+                    <p>Think of it like a bouncer at a club who screens visitors before they can enter. The load balancer can check if traffic is suspicious before it ever reaches your actual servers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2>AnsibleNginxLB</h2>
+                    <p>An educational load balancer demonstration project</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#tech-stack">Tech Stack</a></li>
+                        <li><a href="#getting-started">Getting Started</a></li>
+                    </ul>
+                </div>
+                <div class="footer-github">
+                    <h3>GitHub</h3>
+                    <a href="https://github.com/Samirrahman71/AnsibleNginxLB" target="_blank" class="github-link">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                    <p>Star the project if you find it useful!</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AnsibleNginxLB. Created for educational purposes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>

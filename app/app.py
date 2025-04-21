@@ -30,6 +30,42 @@ class LoadBalancerDemo(BaseHTTPRequestHandler):
             self.wfile.write(health_data.encode())
             return
         
+        # Load balancer method status endpoint
+        if path == '/lb-status':
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')  # Allow cross-origin requests
+            self.end_headers()
+            
+            # In a real-world scenario, this would check the actual NGINX configuration
+            # For demo purposes, we'll just return the default method
+            # This could be enhanced to read the actual config or store the method in a shared state
+            
+            # Try to get the X-Load-Balancing-Method header from the request if NGINX passed it
+            lb_method = self.headers.get('X-Load-Balancing-Method', 'Round Robin')
+            
+            # Map the header value to our method names
+            method_map = {
+                'Round Robin': 'round-robin',
+                'Least Connections': 'least-connections',
+                'IP Hash': 'ip-hash'
+            }
+            
+            # Get the method from the map or default to round-robin
+            method = method_map.get(lb_method, 'round-robin')
+            
+            # Get descriptions for each method
+            descriptions = {
+                'round-robin': 'Distributes requests sequentially across all servers',
+                'least-connections': 'Routes to servers with fewest active connections',
+                'ip-hash': 'Routes users from the same IP address to the same server (session persistence)'
+            }
+            
+            # Send the response
+            lb_data = f'{{"method":"{method}","description":"{descriptions.get(method)}","server":"{os.environ.get("APP_NAME", "app")}","requests":{LoadBalancerDemo.request_count}}}'
+            self.wfile.write(lb_data.encode())
+            return
+        
         # Serve static files
         if path.startswith('/static/'):
             self.serve_static_file(path[8:])

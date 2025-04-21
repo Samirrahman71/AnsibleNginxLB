@@ -1,0 +1,650 @@
+/* Base styles and reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #4a7eff;
+    --secondary-color: #32c766;
+    --dark-color: #2c3e50;
+    --light-color: #f4f7f9;
+    --text-color: #333;
+    --bg-color: #ffffff;
+    --accent-color: #ff6b6b;
+    --border-radius: 8px;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+a:hover {
+    color: #3563cc;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+section {
+    padding: 5rem 0;
+}
+
+/* Header and Navigation */
+header {
+    background: linear-gradient(135deg, #4a7eff 0%, #32c766 100%);
+    color: white;
+    padding: 1rem 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 0;
+}
+
+.logo span {
+    color: #32c766;
+    font-weight: 700;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    color: white;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: var(--transition);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.github-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.github-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Hero Section */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 4rem 0 6rem;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-3px);
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+/* Load Balancer Diagram (Hero Image) */
+.load-balancer-diagram {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    box-shadow: var(--box-shadow);
+}
+
+.user-requests, .nginx-box, .app-servers {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.user-requests i, .nginx-box i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.user-requests p, .nginx-box p {
+    color: white;
+    font-weight: 500;
+}
+
+.arrow-down, .arrow-multiple {
+    position: relative;
+    height: 40px;
+    margin: 1rem auto;
+}
+
+.arrow-down::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: translateX(-50%);
+}
+
+.arrow-down::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    transform: translateX(-50%) rotate(45deg);
+}
+
+.arrow-multiple {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 1rem auto;
+}
+
+.arrow-multiple::before, .arrow-multiple::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.arrow-multiple::before {
+    left: 25%;
+    transform: rotate(15deg);
+}
+
+.arrow-multiple::after {
+    right: 25%;
+    transform: rotate(-15deg);
+}
+
+.app-servers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.server {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+}
+
+.server i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.server p {
+    color: white;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+/* Overview Section */
+.overview {
+    background-color: var(--light-color);
+}
+
+.section-intro {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    color: var(--dark-color);
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    background-color: var(--primary-color);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.feature-icon i {
+    font-size: 1.8rem;
+}
+
+/* How It Works Section */
+.process-flow {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.process-step {
+    display: flex;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.process-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 60px;
+    left: 25px;
+    width: 2px;
+    height: calc(100% + 1rem);
+    background-color: var(--primary-color);
+    opacity: 0.3;
+}
+
+.step-number {
+    background-color: var(--primary-color);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-right: 1.5rem;
+}
+
+.step-content {
+    padding-top: 0.5rem;
+}
+
+/* Tech Stack Section */
+.tech-stack {
+    background-color: var(--light-color);
+}
+
+.technologies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.tech {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.tech:hover {
+    transform: translateY(-5px);
+}
+
+.tech-icon {
+    margin-bottom: 1rem;
+}
+
+.tech-icon i {
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+.custom-icon {
+    width: 60px;
+    height: 60px;
+}
+
+/* Getting Started Section */
+.prerequisites {
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.prerequisites ul {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.prerequisites li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.prerequisites li i {
+    margin-right: 1rem;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.installation-steps .step {
+    margin-bottom: 2.5rem;
+}
+
+.code-block {
+    background-color: var(--dark-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-top: 1rem;
+    overflow-x: auto;
+}
+
+.code-block pre {
+    margin: 0;
+}
+
+.code-block code {
+    color: white;
+    font-family: monospace;
+}
+
+/* Benefits Section */
+.benefits {
+    text-align: center;
+}
+
+.benefits h2 {
+    margin-bottom: 3rem;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.benefit {
+    padding: 2rem;
+    background-color: var(--light-color);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.benefit:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow);
+}
+
+.benefit-icon {
+    background-color: var(--primary-color);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.benefit-icon i {
+    font-size: 1.5rem;
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 4rem 0 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.footer-logo h2 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.footer-logo p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-links h3, .footer-github h3 {
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--border-radius);
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.github-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .hero-text {
+        order: 1;
+    }
+    
+    .hero-image {
+        order: 2;
+        margin-top: 2rem;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .process-step {
+        flex-direction: column;
+    }
+    
+    .step-number {
+        margin-bottom: 1rem;
+    }
+    
+    .process-step:not(:last-child)::after {
+        left: 25px;
+        top: 50px;
+    }
+    
+    section {
+        padding: 3rem 0;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feature, .tech, .benefit, .process-step {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.feature:nth-child(2), .tech:nth-child(2), .benefit:nth-child(2), .process-step:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.feature:nth-child(3), .tech:nth-child(3), .benefit:nth-child(3), .process-step:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.tech:nth-child(4), .benefit:nth-child(4), .process-step:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.tech:nth-child(5), .process-step:nth-child(5) {
+    animation-delay: 0.4s;
+}

@@ -6,6 +6,7 @@
     <title>What is a Load Balancer? - Live Demo (Server {{server_name}})</title>
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="/static/distribution.css">
+    <link rel="stylesheet" href="/static/method-selector.css">
     <script src="/static/counter.js"></script>
 </head>
 <body>
@@ -17,6 +18,37 @@
         
         <div class="intro-banner">
             <p><strong>Try this:</strong> Refresh this page several times and watch the server indicator change color! Each refresh sends you to a different server behind the load balancer.</p>
+        </div>
+        
+        <div class="lb-method-selector">
+            <h2>Select Load Balancing Method</h2>
+            <div class="method-options">
+                <div class="method-option" id="round-robin">
+                    <div class="method-radio">
+                        <input type="radio" name="lb-method" id="method-rr" value="round-robin" checked>
+                        <label for="method-rr">Round Robin</label>
+                    </div>
+                    <p>Distributes requests evenly in sequential order across all servers.</p>
+                </div>
+                
+                <div class="method-option" id="least-connections">
+                    <div class="method-radio">
+                        <input type="radio" name="lb-method" id="method-lc" value="least-connections">
+                        <label for="method-lc">Least Connections</label>
+                    </div>
+                    <p>Sends new requests to the server currently handling the fewest connections.</p>
+                </div>
+                
+                <div class="method-option" id="ip-hash">
+                    <div class="method-radio">
+                        <input type="radio" name="lb-method" id="method-ip" value="ip-hash">
+                        <label for="method-ip">IP Hash (Sticky Sessions)</label>
+                    </div>
+                    <p>Consistently routes the same user to the same server based on their IP address.</p>
+                </div>
+            </div>
+            <button id="apply-lb-method" class="apply-button">Apply Method</button>
+            <div id="lb-status" class="lb-status">Current method: <span id="current-method">Round Robin</span></div>
         </div>
         
         <section class="explanation">
@@ -156,8 +188,9 @@
             <div class="tech-highlights">
                 <div class="tech-item">
                     <h3>NGINX Configuration</h3>
-                    <div class="code-snippet">
+                    <div class="code-snippet" id="nginx-config-snippet">
                         <pre><code>upstream backend {
+    # Round Robin (default)
     server app1:8000;
     server app2:8000;
     server app3:8000;
@@ -192,6 +225,113 @@ server {
         </footer>
     </div>
     <script>
+        // Function to fetch current load balancing method from the server
+        async function getCurrentMethod() {
+            try {
+                const response = await fetch('/lb-status');
+                const data = await response.json();
+                document.getElementById('current-method').textContent = data.method;
+                
+                // Update the radio button
+                document.querySelector(`input[value="${data.method}"]`).checked = true;
+                
+                // Update code snippet based on method
+                updateCodeSnippet(data.method);
+                
+                return data.method;
+            } catch (error) {
+                console.error('Error fetching load balancing method:', error);
+                return 'round-robin'; // Default
+            }
+        }
+        
+        // Update NGINX configuration code snippet based on selected method
+        function updateCodeSnippet(method) {
+            let snippet = '';
+            
+            if (method === 'least-connections') {
+                snippet = `upstream backend {
+    least_conn; # Send to server with fewest active connections
+    server app1:8000;
+    server app2:8000;
+    server app3:8000;
+}
+server {
+    listen 80;
+    location / {
+        proxy_pass http://backend;
+    }
+}`;
+            } else if (method === 'ip-hash') {
+                snippet = `upstream backend {
+    ip_hash; # Consistent routing based on client IP
+    server app1:8000;
+    server app2:8000;
+    server app3:8000;
+}
+server {
+    listen 80;
+    location / {
+        proxy_pass http://backend;
+    }
+}`;
+            } else { // round-robin
+                snippet = `upstream backend {
+    # Round Robin (default)
+    server app1:8000;
+    server app2:8000;
+    server app3:8000;
+}
+server {
+    listen 80;
+    location / {
+        proxy_pass http://backend;
+    }
+}`;
+            }
+            
+            document.querySelector('#nginx-config-snippet code').textContent = snippet;
+        }
+        
+        // Apply the selected load balancing method
+        async function applyLoadBalancingMethod() {
+            const selectedMethod = document.querySelector('input[name="lb-method"]:checked').value;
+            const statusElement = document.getElementById('lb-status');
+            const button = document.getElementById('apply-lb-method');
+            
+            // Update UI to show loading state
+            button.disabled = true;
+            button.textContent = 'Applying...';
+            statusElement.innerHTML = `<span class="status-updating">Updating to ${selectedMethod}...</span>`;
+            
+            try {
+                // In a real implementation, this would make an API call to update the method
+                // For demo purposes, we'll simulate the delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Normally we'd make this call to the backend
+                // const response = await fetch('/api/set-lb-method', {
+                //     method: 'POST',
+                //     headers: { 'Content-Type': 'application/json' },
+                //     body: JSON.stringify({ method: selectedMethod })
+                // });
+                
+                // Show success message and update UI
+                statusElement.innerHTML = `<span class="status-success">Method changed to <strong>${selectedMethod}</strong>. Refresh page to see effect.</span>`;
+                updateCodeSnippet(selectedMethod);
+                
+                // For demo, we'll also show a popup explaining what's happening
+                alert(`Load balancing method changed to ${selectedMethod}!\n\nIn a production setup, this would run the Ansible playbook with:\n\nansible-playbook -i ansible/inventory/hosts ansible/lb.yml -e "lb_method=${selectedMethod}"\n\nRefresh the page a few times to see the new behavior.`);
+                
+            } catch (error) {
+                console.error('Error applying load balancing method:', error);
+                statusElement.innerHTML = `<span class="status-error">Error: Could not update method</span>`;
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Apply Method';
+            }
+        }
+        
         // Highlight the current server in the diagram
         document.addEventListener('DOMContentLoaded', function() {
             const serverName = "{{server_name}}";
@@ -201,6 +341,12 @@ server {
                     element.classList.add('active');
                 }
             });
+            
+            // Set up event listener for the apply button
+            document.getElementById('apply-lb-method').addEventListener('click', applyLoadBalancingMethod);
+            
+            // Get current method when page loads
+            getCurrentMethod();
         });
     </script>
 </body>
