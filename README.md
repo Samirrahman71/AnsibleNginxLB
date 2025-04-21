@@ -66,11 +66,12 @@ ansible-playbook -i ansible/inventory/hosts ansible/lb.yml -e "lb_method=ip-hash
 - Use the interactive visualizations to understand how load balancing works
 - Check the hit counter to see the distribution of your requests
 
-### 5. Educational Landing Page
-We've created a beautiful landing page that explains load balancing concepts in simple terms:
-- Visit [https://samirrahman71.github.io/AnsibleNginxLB](https://samirrahman71.github.io/AnsibleNginxLB) for the educational landing page
+### 5. Educational Demo Website
+We've created a dedicated website that explains load balancing concepts in simple terms:
+- **Official Demo Website**: [https://sites.google.com/sjsu.edu/ansiblengnixlb/home](https://sites.google.com/sjsu.edu/ansiblengnixlb/home)
 - Perfect for sharing with colleagues who are new to load balancing
 - Explains core concepts with everyday analogies
+- Provides visual demonstrations of load balancing in action
 
 ### 6. API Endpoints
 - Health Check: [http://localhost:8080/health](http://localhost:8080/health)
@@ -118,7 +119,7 @@ graph LR
 - **Educational Content:** Learn about load balancing through simple explanations
 - **API Health Checks:** Monitor the status of backend services
 - **Traffic Distribution Metrics:** Track how traffic is distributed
-- **Beautiful Landing Page:** Simple explanations with relatable examples
+- **Educational Demo Website:** Simple explanations with relatable examples at [sites.google.com/sjsu.edu/ansiblengnixlb](https://sites.google.com/sjsu.edu/ansiblengnixlb/home)
 
 ## 📊 Technical Details
 
